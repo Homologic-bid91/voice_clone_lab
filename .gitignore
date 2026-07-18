@@ -1,0 +1,25 @@
+# Runtime data & artifacts — voice recordings and voice-clone checkpoints are
+# biometric personal data. Never commit them.
+data/
+outputs/
+models/
+out/
+tmp/
+attic/
+.venvs/
+third_party/
+.gradio/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+
+# Environments / editors
+.venv/
+.env
+.DS_Store

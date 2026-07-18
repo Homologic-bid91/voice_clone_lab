@@ -1,0 +1,56 @@
+# Voice Clone Lab configuration.
+# Every key here is read by the pipeline; there are no dead keys and no other
+# source of truth. Data and output paths are NOT listed here — they derive
+# from the speaker name (see Config.paths_for):
+#   data/voices/<speaker>/{raw,extracted,cleaned,chunks,transcripts,dataset,reference}
+#   outputs/checkpoints/<speaker>/   outputs/generated/<speaker>/
+
+project:
+  speaker: default        # active voice; --speaker on any command overrides
+  sample_rate: 24000
+  device: cuda:0
+
+qwen:
+  repo_url: https://github.com/QwenLM/Qwen3-TTS.git
+  repo_commit: "022e286b98fbec7e1e916cb940cdf532cd9f488e"  # pinned; `vcl setup` enforces
+  repo_path: third_party/Qwen3-TTS
+  init_model_path: models/Qwen3-TTS-12Hz-1.7B-Base
+  init_model_id: Qwen/Qwen3-TTS-12Hz-1.7B-Base
+  attn_implementation: auto   # auto | flash_attention_2 | sdpa (auto = flash if installed)
+
+training:
+  batch_size: 8             # 24 GB VRAM: use 2. 32 GB: 2-4. See README hardware table.
+  lr: 2.0e-6
+  epochs: 5
+
+generation:
+  checkpoint: null          # explicit override; else newest checkpoint-* for the speaker
+  temperature: 0.9
+  top_p: 1.0
+  top_k: 50
+  language: Auto
+
+audio:
+  min_chunk_seconds: 3.0
+  max_chunk_seconds: 12.0
+  target_chunk_seconds: 8.0      # ideal chunk length when scoring a reference clip
+  reference_min_seconds: 3.0
+  reference_ideal_min_seconds: 5.0
+  reference_ideal_max_seconds: 15.0
+  silence_top_db: 35
+  pad_seconds: 0.12              # padding added around each split chunk
+  min_rms_dbfs: -42              # chunks quieter than this are rejected
+  min_snr_db: 8                  # chunks with estimated SNR below this are rejected
+  vad_aggressiveness: 2          # 0-3, used only when webrtcvad is installed
+  clean_padding_ms: 180
+  clean_join_silence_ms: 180
+
+asr:
+  backend: auto             # auto | whisperx | faster-whisper | whisper
+  model: large-v3
+  device: cuda
+  compute_type: float16
+  language: en
+
+system:
+  min_free_gb: 80           # free disk space required by `vcl check`

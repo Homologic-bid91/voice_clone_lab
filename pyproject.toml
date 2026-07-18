@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "voice-clone-lab"
+version = "0.1.0"
+description = "Fine-tune Qwen3-TTS on your own voice and generate speech — CLI and web UI."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "torch",
+    "torchaudio",
+    "transformers",
+    "accelerate",
+    "safetensors",
+    "soundfile",
+    "librosa",
+    "numpy",
+    "scipy",
+    "PyYAML",
+    "tqdm",
+    "faster-whisper",
+    "huggingface_hub[cli]",
+]
+
+[project.optional-dependencies]
+ui = ["gradio>=5"]
+yt = ["yt-dlp"]
+asr = ["whisperx"]
+vad = ["webrtcvad"]
+denoise = ["noisereduce"]
+dev = ["pytest"]
+
+[project.scripts]
+vcl = "voice_clone_lab.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
