@@ -23,3 +23,6 @@ dist/
 .venv/
 .env
 .DS_Store
+
+# Local promo/marketing material (remotion project, footage, audio)
+promo/
